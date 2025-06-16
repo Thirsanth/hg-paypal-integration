@@ -1,0 +1,86 @@
+import React, { useContext } from "react";
+import Kids from "../../assets/Home/Products/Kids.png";
+import Adults from "../../assets/Home/Products/Adults.png";
+import FullStar from "../../assets/Home/Products/Full Star.png";
+import HollowStar from "../../assets/Home/Products/Hollow Star.png";
+import ProductButton from "../Buttons/ProductButton";
+import { CartContext } from "../CartContext";
+
+function Products() {
+
+   const { addToCart } = useContext(CartContext)
+    const productKid = {
+      id: 1,
+      name: "Kids Multivitamin Gummies",
+      price: 50,
+      image: Kids,
+    };
+
+        const productAdult = {
+          id: 2,
+          name: "Adult Multivitamin Gummies",
+          price: 50,
+          image: Adults,
+        };
+
+  return (
+    <div className="section-container" id="products">
+      <div className="heading">
+        <h2>Our Gummies, Your Joyful Journey</h2>
+        <p>Where Health Meets Happiness in Every Bite</p>
+      </div>
+      <div className="products">
+        <div className="products-card">
+          <img src={Kids} alt="Happy Gummies Kids Product" />
+          <div className="product-details">
+            <h3>Kids Multivitamin Gummies</h3>
+            <p>$00.0</p>
+            <div className="product-ratings">
+              <div className="ratings-stars">
+                <img src={FullStar} />
+                <img src={FullStar} />
+                <img src={FullStar} />
+                <img src={FullStar} />
+                <img src={HollowStar} />
+              </div>
+              <span>10 Reviews</span>
+            </div>
+            <button className="AddToCartButton" onClick={()=>{
+              addToCart(productKid);
+            }}>Add to Cart</button>
+            <ProductButton toLink="/kids" text="Know More" />
+          </div>
+        </div>
+        <div className="products-card">
+          <img src={Adults} alt="Happy Gummies Adults Product" />
+          <div className="product-details">
+            <div className="sold-label-container">
+              <p>Sold Out</p>
+            </div>
+            <h3>Adult Multivitamin Gummies</h3>
+            <p>$00.0</p>
+            <div className="product-ratings">
+              <div className="ratings-stars">
+                <img src={FullStar} />
+                <img src={FullStar} />
+                <img src={FullStar} />
+                <img src={FullStar} />
+                <img src={HollowStar} />
+              </div>
+              <span>10 Reviews</span>
+            </div>
+            <button className="AddToCartButton" onClick={()=>{
+              addToCart(productAdult);
+            }}>
+              Add to Cart
+            </button>
+            <a className="ComingSoon">Out of Stock</a>
+            <ProductButton toLink="/adults" text="Know More" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Products;
