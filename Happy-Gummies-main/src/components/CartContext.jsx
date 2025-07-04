@@ -49,8 +49,13 @@ const decreaseQuantity = (id) => {
     setCartItems(cartItems.filter(item => item.id !== id));
   };
 
+  const clearCart = () => {
+  setCartItems([]);               // Clear from state
+  localStorage.removeItem("cart"); // Clear from localStorage
+};
+
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart,increaseQuantity,decreaseQuantity }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart,increaseQuantity,decreaseQuantity, clearCart }}>
       {children}
     </CartContext.Provider>
   );

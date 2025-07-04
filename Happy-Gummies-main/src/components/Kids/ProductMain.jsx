@@ -85,8 +85,10 @@ import HollowStar from "../../assets/Testimony/Hollow Star.svg";
 import AddToCartButton from "../Buttons/AddToCartButton";
 import ProductImg from "../../assets/Kids/Product Images/Product Image.png";
 import { CartContext } from "../CartContext";
+import { useParams } from "react-router-dom";
 
 function ProductMain() {
+  const { id } = useParams();
   const { addToCart } = useContext(CartContext);
   const [product, setProduct] = useState(null);
 
@@ -101,7 +103,7 @@ function ProductMain() {
     };
 
     fetchProduct();
-  }, []);
+  }, [id]);
 
   if (!product) return <div>Loading...</div>;
 
@@ -125,7 +127,11 @@ function ProductMain() {
             <span>10 Reviews</span>
           </div>
           <button className="AddToCartButton"
-            onClick={() => addToCart(product)}
+            onClick={() => addToCart({
+              id: product._id,
+                name: product.title,
+                price: product.price,
+                image: product.image,})}
           >
             Add to Cart
           </button>

@@ -50,14 +50,16 @@
 // export default Payment;
 
 
-import React from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useNavigate } from "react-router-dom";
+import { CartContext } from "../CartContext";
 
 function Payment({ total, cartItems, address, onSuccess }) {
   const navigate = useNavigate();
   const client_id = import.meta.env.VITE_CLIENT_ID;
+  const { clearCart } = useContext(CartContext);
 
   const createOrder = async () => {
     const res = await axios.post("http://localhost:5000/create-paypal-order", {
@@ -74,6 +76,7 @@ function Payment({ total, cartItems, address, onSuccess }) {
     });
     alert("✅ Payment successful!");
     // onSuccess(orderID);
+    clearCart();
     navigate("/checkout4", {
       state: {
         orderId: orderID, // or just `orderID`
