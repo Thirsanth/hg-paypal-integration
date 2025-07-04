@@ -18,6 +18,24 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
+  const increaseQuantity = (id) => {
+  setCartItems(prevItems =>
+    prevItems.map(item =>
+      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+    )
+  );
+};
+
+const decreaseQuantity = (id) => {
+  setCartItems(prevItems =>
+    prevItems.map(item =>
+      item.id === id && item.quantity > 1
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    )
+  );
+};
+
   const addToCart = (item) => {
     const exists = cartItems.find((i) => i.id === item.id);
     if (exists) {
@@ -32,7 +50,7 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart,increaseQuantity,decreaseQuantity }}>
       {children}
     </CartContext.Provider>
   );

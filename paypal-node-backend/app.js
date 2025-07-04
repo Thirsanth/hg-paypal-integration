@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 
+
 const orderRoutes = require('./routes/orderRoutes');
 const { client } = require('./paypal/paypalClient');
 const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
@@ -12,7 +13,7 @@ const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-
+app.use('/api/products', require('./routes/productRoutes'));
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
@@ -49,7 +50,7 @@ app.post('/create-paypal-order', async (req, res) => {
 
 
 app.post('/capture-paypal-order', async (req, res) => {
-  const { orderId,cartItems } = req.body;
+  const { orderId,cartItems,address } = req.body;
   const request = new checkoutNodeJssdk.orders.OrdersCaptureRequest(orderId);
   request.requestBody({});
 
@@ -67,6 +68,7 @@ app.post('/capture-paypal-order', async (req, res) => {
     email: capture.result.payer.email_address,
     name: capture.result.payer.name.given_name + ' ' + capture.result.payer.name.surname,
   },
+  address: address,
   create_time: capture.result.create_time,
 };
 

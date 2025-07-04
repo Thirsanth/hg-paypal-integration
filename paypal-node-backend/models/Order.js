@@ -51,6 +51,30 @@ const orderSchema = new mongoose.Schema({
     email: String,
     name: String,
   },
+   address: {
+    contact: {
+      firstName: String,
+      lastName: String,
+      email: String,
+      phone: String,
+    },
+    shipping: {
+      house: String,
+      addressLine: String,
+      city: String,
+      state: String,
+      postalCode: String,
+      landmark: String,
+    },
+    billing: {
+      house: String,
+      addressLine: String,
+      city: String,
+      state: String,
+      postalCode: String,
+      landmark: String,
+    }
+  },
   create_time: String,
 }, { timestamps: true });
 
