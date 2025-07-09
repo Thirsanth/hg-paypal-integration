@@ -96,7 +96,7 @@ function ProductMain() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/products/68652feafb90c354fe9c598c`);
+        const res = await axios.get(`https://hg-paypal-backend.onrender.com/api/products/68652feafb90c354fe9c598c`);
         setProduct(res.data);
       } catch (err) {
         console.error("Error fetching product:", err.response?.data || err.message);
