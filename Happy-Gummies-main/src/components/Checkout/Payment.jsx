@@ -62,14 +62,14 @@ function Payment({ total, cartItems, address, onSuccess }) {
   const { clearCart } = useContext(CartContext);
 
   const createOrder = async () => {
-    const res = await axios.post("http://localhost:5000/create-paypal-order", {
+    const res = await axios.post("https://hg-paypal-backend.onrender.com/create-paypal-order", {
       amount: total,
     });
     return res.data.id;
   };
 
   const captureOrder = async (orderID) => {
-    await axios.post("http://localhost:5000/capture-paypal-order", {
+    await axios.post("hhttps://hg-paypal-backend.onrender.com/capture-paypal-order", {
       orderId: orderID,
       cartItems,
        address,
