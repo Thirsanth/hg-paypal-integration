@@ -107,8 +107,8 @@ function Products() {
     const fetchProducts = async () => {
       try {
         const [kidsRes, adultsRes] = await Promise.all([
-          axios.get(`http://localhost:5000/api/products/${KIDS_PRODUCT_ID}`),
-          axios.get(`http://localhost:5000/api/products/${ADULTS_PRODUCT_ID}`),
+          axios.get(`https://hg-paypal-backend.onrender.com/api/products/${KIDS_PRODUCT_ID}`),
+          axios.get(`https://hg-paypal-backend.onrender.com/api/products/${ADULTS_PRODUCT_ID}`),
         ]);
 
         setKidsProduct(kidsRes.data);
