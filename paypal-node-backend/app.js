@@ -9,11 +9,11 @@ require('dotenv').config();
 
 
 const app = express();
-app.options('*', cors({
-  origin: 'https://hg-paypal-frontend.onrender.com',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  credentials: true,
-}));
+// app.options('*', cors({
+//   origin: 'https://hg-paypal-frontend.onrender.com',
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   credentials: true,
+// }));
 const orderRoutes = require('./routes/orderRoutes');
 const { client } = require('./paypal/paypalClient');
 const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
