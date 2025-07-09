@@ -69,7 +69,7 @@ function Payment({ total, cartItems, address, onSuccess }) {
   };
 
   const captureOrder = async (orderID) => {
-    await axios.post("hhttps://hg-paypal-backend.onrender.com/capture-paypal-order", {
+    await axios.post("https://hg-paypal-backend.onrender.com/capture-paypal-order", {
       orderId: orderID,
       cartItems,
        address,
