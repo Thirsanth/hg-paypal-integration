@@ -6,12 +6,23 @@ require('dotenv').config();
 
 
 
+
+
+const app = express();
+app.options('*', cors({
+  origin: 'https://hg-paypal-frontend.onrender.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true,
+}));
 const orderRoutes = require('./routes/orderRoutes');
 const { client } = require('./paypal/paypalClient');
 const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
-
-const app = express();
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: 'https://hg-paypal-frontend.onrender.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true,
+}));
 app.use(bodyParser.json());
 app.use('/api/products', require('./routes/productRoutes'));
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
